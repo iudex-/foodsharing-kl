@@ -1,0 +1,16 @@
+name: delpoy
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  delpoy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: delpoy
+      run: |
+        sudo apt-get install -y lftp
+        lftp -c "open -u ${{secrets.user}},${{secrets.password}} sftp://${{secrets.server}}; mput ./*"
