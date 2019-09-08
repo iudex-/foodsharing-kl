@@ -13,4 +13,5 @@ jobs:
     - name: delpoy
       run: |
         sudo apt-get install -y lftp
+        ssh-keyscan -H ${{secrets.server}} >> ~/.ssh/known_hosts
         lftp -c "open -u ${{secrets.user}},${{secrets.password}} sftp://${{secrets.server}}; mput ./*"
